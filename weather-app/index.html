@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Weather App - Beautiful glassmorphism design with accurate weather forecasts">
+    <title>WeatherLux - Premium Weather Experience</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
+    
+    <!-- Favicon and Touch Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- CSS Imports - Modular Design -->
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/animations.css">
+    <link rel="stylesheet" href="src/css/components/header.css">
+    <link rel="stylesheet" href="src/css/components/search.css">
+    <link rel="stylesheet" href="src/css/components/current-card.css">
+    <link rel="stylesheet" href="src/css/components/hourly.css">
+    <link rel="stylesheet" href="src/css/components/forecast.css">
+    <link rel="stylesheet" href="src/css/components/unit-toggle.css">
+    <link rel="stylesheet" href="src/css/components/theme-toggle.css">
+    <link rel="stylesheet" href="src/css/components/toast.css">
+    <link rel="stylesheet" href="src/css/themes/dark.css" id="theme-stylesheet">
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#0F172A">
+</head>
+<body>
+    <!-- Glass Header with Sticky Navigation -->
+    <header class="glass-header" id="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="brand-title">
+                        <span class="brand-icon">☀</span>
+                        WeatherLux
+                    </h1>
+                </div>
+                
+                <div class="header-controls">
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle glass-button" id="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    
+                    <!-- Unit Toggle -->
+                    <div class="unit-toggle-wrapper">
+                        <button class="unit-toggle glass-button active" data-unit="celsius" aria-label="Celsius">°C</button>
+                        <button class="unit-toggle glass-button" data-unit="fahrenheit" aria-label="Fahrenheit">°F</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Content -->
+    <main class="app-main" id="app-main">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section" id="search-section">
+                <div class="search-wrapper glass-card">
+                    <div class="search-input-wrapper">
+                        <input type="text" 
+                               id="search-input" 
+                               class="search-input" 
+                               placeholder="Search for a city..." 
+                               autocomplete="off"
+                               spellcheck="false">
+                        <div class="search-icon">🔍</div>
+                    </div>
+                    
+                    <button class="location-btn glass-button" id="location-btn" aria-label="Use current location">
+                        <span class="location-icon">📍</span>
+                        Current Location
+                    </button>
+                </div>
+                
+                <!-- Search Results Dropdown -->
+                <div class="search-results glass-card" id="search-results" style="display: none;">
+                    <!-- Dynamic search results will be populated here -->
+                </div>
+            </section>
+
+            <!-- Current Weather Card -->
+            <section class="current-weather-section" id="current-weather-section" style="display: none;">
+                <div class="current-weather-card glass-card premium-shadow">
+                    <div class="current-weather-header">
+                        <div class="location-info">
+                            <h2 class="current-location" id="current-location">Loading...</h2>
+                            <p class="current-time" id="current-time"></p>
+                        </div>
+                        <div class="weather-icon-large">
+                            <div class="weather-icon-wrapper" id="current-weather-icon">
+                                ☀️
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="current-weather-main">
+                        <div class="temperature-display">
+                            <span class="current-temp" id="current-temp">--°</span>
+                            <span class="feels-like" id="feels-like">Feels like --°</span>
+                        </div>
+                        
+                        <div class="weather-description">
+                            <p class="condition" id="weather-condition">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details-grid">
+                        <div class="detail-item glass-detail">
+                            <span class="detail-icon">💧</span>
+                            <div class="detail-content">
+                                <span class="detail-label">Humidity</span>
+                                <span class="detail-value" id="humidity">--%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item glass-detail">
+                            <span class="detail-icon">💨</span>
+                            <div class="detail-content">
+                                <span class="detail-label">Wind</span>
+                                <span class="detail-value" id="wind-speed">-- km/h</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item glass-detail">
+                            <span class="detail-icon">👁</span>
+                            <div class="detail-content">
+                                <span class="detail-label">Visibility</span>
+                                <span class="detail-value" id="visibility">-- km</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item glass-detail">
+                            <span class="detail-icon">📊</span>
+                            <div class="detail-content">
+                                <span class="detail-label">Pressure</span>
+                                <span class="detail-value" id="pressure">-- mb</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast Section -->
+            <section class="hourly-section" id="hourly-section" style="display: none;">
+                <div class="section-header">
+                    <h3 class="section-title">24-Hour Forecast</h3>
+                </div>
+                
+                <div class="hourly-scroll-wrapper glass-card">
+                    <div class="hourly-scroll" id="hourly-forecast">
+                        <!-- Dynamic hourly data will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7-Day Forecast Section -->
+            <section class="forecast-section" id="forecast-section" style="display: none;">
+                <div class="section-header">
+                    <h3 class="section-title">7-Day Forecast</h3>
+                </div>
+                
+                <div class="forecast-grid" id="forecast-grid">
+                    <!-- Dynamic 7-day forecast will be populated here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none;">
+        <div class="loading-spinner glass-card">
+            <div class="spinner-animation"></div>
+            <p class="loading-text">Fetching weather data...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container">
+        <!-- Dynamic toast notifications will appear here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/js/config.js"></script>
+    <script src="src/js/store/state.js"></script>
+    <script src="src/js/utils/dom.js"></script>
+    <script src="src/js/utils/format.js"></script>
+    <script src="src/js/utils/units.js"></script>
+    <script src="src/js/utils/debounce.js"></script>
+    <script src="src/js/utils/error.js"></script>
+    <script src="src/js/services/openMeteo.js"></script>
+    <script src="src/js/services/geocoding.js"></script>
+    <script src="src/js/services/cache.js"></script>
+    <script src="src/js/components/Header.js"></script>
+    <script src="src/js/components/SearchBar.js"></script>
+    <script src="src/js/components/CurrentWeatherCard.js"></script>
+    <script src="src/js/components/HourlyScroller.js"></script>
+    <script src="src/js/components/ForecastGrid.js"></script>
+    <script src="src/js/components/UnitToggle.js"></script>
+    <script src="src/js/components/ThemeToggle.js"></script>
+    <script src="src/js/components/Loader.js"></script>
+    <script src="src/js/components/Toast.js"></script>
+    <script src="src/js/workers/sw-register.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+</html>
