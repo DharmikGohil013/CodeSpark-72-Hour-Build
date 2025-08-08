@@ -1,0 +1,492 @@
+/* Light Theme - Premium Glassmorphism Design */
+
+[data-theme="light"] {
+  /* Light theme color palette */
+  --color-bg-primary: #F8FAFC;      /* Slate-50 */
+  --color-bg-secondary: #F1F5F9;    /* Slate-100 */
+  --color-bg-tertiary: #E2E8F0;     /* Slate-200 */
+  --color-bg-quaternary: #CBD5E1;   /* Slate-300 */
+  
+  /* Light theme text colors */
+  --color-text-primary: #0F172A;    /* Slate-900 */
+  --color-text-secondary: #1E293B;  /* Slate-800 */
+  --color-text-tertiary: #334155;   /* Slate-700 */
+  --color-text-quaternary: #475569; /* Slate-600 */
+  --color-text-muted: #64748B;      /* Slate-500 */
+  
+  /* Light theme gradients */
+  --gradient-bg-primary: radial-gradient(
+    ellipse at center, 
+    #FFFFFF 0%, 
+    #F8FAFC 50%, 
+    #F1F5F9 100%
+  );
+  
+  --gradient-bg-secondary: linear-gradient(
+    135deg,
+    #FFFFFF 0%,
+    #F8FAFC 40%,
+    #F1F5F9 100%
+  );
+  
+  /* Light theme glass properties */
+  --glass-card-bg: rgba(255, 255, 255, 0.8);
+  --glass-card-border: rgba(0, 0, 0, 0.08);
+  --glass-backdrop: rgba(248, 250, 252, 0.8);
+  --glass-blur: 25px;
+  
+  /* Light theme shadows */
+  --shadow-premium: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 16px 64px rgba(0, 0, 0, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    
+  --shadow-xl: 
+    0 16px 64px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.06);
+    
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.1);
+  
+  /* Light theme glows */
+  --glow-primary: 0 0 20px rgba(79, 70, 229, 0.2);
+  --glow-secondary: 0 0 20px rgba(6, 182, 212, 0.2);
+  --glow-accent: 0 0 20px rgba(250, 204, 21, 0.2);
+  --glow-white: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Body background for light theme */
+[data-theme="light"] body {
+  background: var(--gradient-bg-primary);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+}
+
+/* Enhanced glass cards for light theme */
+[data-theme="light"] .glass-card {
+  background: var(--glass-card-bg);
+  border: 1px solid var(--glass-card-border);
+  box-shadow: var(--shadow-premium);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+}
+
+[data-theme="light"] .glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Light theme header */
+[data-theme="light"] .glass-header {
+  background: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .glass-header::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(79, 70, 229, 0.1) 30%,
+    rgba(79, 70, 229, 0.2) 50%,
+    rgba(79, 70, 229, 0.1) 70%,
+    transparent 100%
+  );
+}
+
+/* Light theme brand styling */
+[data-theme="light"] .brand-title {
+  color: var(--color-text-primary);
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(79, 70, 229, 0.2);
+}
+
+[data-theme="light"] .brand-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Light theme current weather card */
+[data-theme="light"] .current-weather-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(248, 250, 252, 0.8) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 16px 64px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .current-temp {
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Light theme weather details */
+[data-theme="light"] .detail-item {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+[data-theme="light"] .detail-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 20px rgba(79, 70, 229, 0.1);
+}
+
+/* Light theme search components */
+[data-theme="light"] .search-input-wrapper {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .search-input-wrapper:focus-within {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-primary);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.04),
+    0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+[data-theme="light"] .search-input {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Light theme search results */
+[data-theme="light"] .search-results {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 16px 64px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .search-result-item:hover {
+  background: rgba(248, 250, 252, 0.8);
+}
+
+[data-theme="light"] .search-result-item:focus {
+  background: rgba(79, 70, 229, 0.1);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* Light theme hourly forecast */
+[data-theme="light"] .hourly-item {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+[data-theme="light"] .hourly-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hourly-item.current {
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.15) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 20px rgba(79, 70, 229, 0.15);
+}
+
+/* Light theme forecast cards */
+[data-theme="light"] .forecast-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(248, 250, 252, 0.8) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .forecast-card:hover {
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 30px rgba(79, 70, 229, 0.1);
+}
+
+[data-theme="light"] .forecast-card.today {
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.1) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+/* Light theme forecast details */
+[data-theme="light"] .forecast-detail {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .forecast-detail:hover {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Light theme buttons */
+[data-theme="light"] .glass-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .glass-button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 20px rgba(79, 70, 229, 0.1);
+}
+
+/* Light theme location button */
+[data-theme="light"] .location-btn {
+  background: var(--gradient-button);
+  color: var(--color-text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.2);
+}
+
+[data-theme="light"] .location-btn:hover {
+  background: var(--gradient-button-hover);
+  box-shadow: 
+    0 6px 20px rgba(79, 70, 229, 0.25),
+    0 0 30px rgba(79, 70, 229, 0.15);
+}
+
+/* Light theme toggles */
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .unit-toggle-wrapper {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .theme-toggle:hover,
+[data-theme="light"] .unit-toggle-wrapper:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Light theme toast notifications */
+[data-theme="light"] .toast {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 16px 64px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* Light theme scrollbars */
+[data-theme="light"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    45deg,
+    var(--color-primary-light) 0%,
+    var(--color-secondary-light) 100%
+  );
+}
+
+/* Light theme loading states */
+[data-theme="light"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Light theme focus states */
+[data-theme="light"] *:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 
+    0 0 0 4px rgba(79, 70, 229, 0.15),
+    0 0 20px rgba(79, 70, 229, 0.1);
+}
+
+/* Light theme selection */
+[data-theme="light"] ::selection {
+  background: rgba(79, 70, 229, 0.2);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] ::-moz-selection {
+  background: rgba(79, 70, 229, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* Light theme weather conditions */
+[data-theme="light"] .current-weather-card[data-weather="sunny"] {
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.1) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+}
+
+[data-theme="light"] .current-weather-card[data-weather="cloudy"] {
+  background: linear-gradient(
+    135deg,
+    rgba(148, 163, 184, 0.1) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+}
+
+[data-theme="light"] .current-weather-card[data-weather="rainy"] {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.1) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+}
+
+/* Light theme weather icon enhancements */
+[data-theme="light"] .weather-icon-wrapper::before {
+  background: linear-gradient(
+    45deg,
+    rgba(79, 70, 229, 0.1),
+    rgba(6, 182, 212, 0.1),
+    rgba(250, 204, 21, 0.1)
+  );
+}
+
+/* Light theme text shadows */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Light theme responsive adjustments */
+@media (max-width: 768px) {
+  [data-theme="light"] .glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+@media (max-width: 480px) {
+  [data-theme="light"] .glass-header {
+    background: rgba(248, 250, 252, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* Light theme high contrast mode */
+@media (prefers-contrast: high) {
+  [data-theme="light"] {
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8F9FA;
+    --color-text-primary: #000000;
+    --glass-card-bg: rgba(255, 255, 255, 0.95);
+    --glass-card-border: rgba(0, 0, 0, 0.2);
+  }
+  
+  [data-theme="light"] .glass-card {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  [data-theme="light"] .glass-button {
+    border: 2px solid rgba(0, 0, 0, 0.15);
+  }
+  
+  [data-theme="light"] .current-temp {
+    -webkit-text-fill-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+  }
+}
+
+/* Light theme print styles */
+@media print {
+  [data-theme="light"] * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}

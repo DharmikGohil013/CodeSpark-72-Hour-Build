@@ -1,0 +1,575 @@
+/* Premium 7-Day Forecast Component */
+
+.forecast-section {
+  margin-bottom: var(--space-12);
+  animation: slideInUp var(--duration-normal) var(--ease-out) 0.4s both;
+}
+
+.forecast-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Forecast Card */
+.forecast-card {
+  background: var(--glass-card-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+  box-shadow: var(--shadow-premium);
+}
+
+.forecast-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+.forecast-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left var(--duration-normal) var(--ease-out);
+}
+
+.forecast-card:hover::after {
+  left: 100%;
+}
+
+.forecast-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    var(--shadow-premium),
+    var(--glow-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.forecast-card:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Today's Forecast Highlight */
+.forecast-card.today {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.15) 0%,
+    var(--glass-card-bg) 50%
+  );
+  border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+  box-shadow: 
+    var(--shadow-premium),
+    0 0 20px rgba(var(--color-primary-rgb), 0.2);
+}
+
+.forecast-card.today::before {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-accent) 100%
+  );
+  height: 2px;
+}
+
+/* Forecast Header */
+.forecast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-5);
+}
+
+.forecast-date {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.forecast-day {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: capitalize;
+}
+
+.forecast-card.today .forecast-day {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.forecast-date-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Weather Icon */
+.forecast-weather-icon {
+  font-size: var(--font-size-3xl);
+  transition: all var(--duration-normal) var(--ease-out);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  position: relative;
+}
+
+.forecast-card:hover .forecast-weather-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.forecast-card.today .forecast-weather-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Temperature Range */
+.temperature-range {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  position: relative;
+}
+
+.temp-high {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.temp-low {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.temp-separator {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  margin: 0 var(--space-2);
+}
+
+/* Temperature Bar */
+.temperature-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  position: relative;
+  margin: var(--space-3) 0;
+  overflow: hidden;
+}
+
+.temperature-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 70%; /* This would be calculated based on temperature range */
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary) 0%,
+    var(--color-accent) 100%
+  );
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+/* Weather Details */
+.forecast-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.forecast-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.forecast-detail:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.forecast-detail-icon {
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  min-width: 16px;
+  text-align: center;
+}
+
+.forecast-detail-content {
+  flex: 1;
+}
+
+.forecast-detail-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-05);
+  line-height: var(--line-height-tight);
+}
+
+.forecast-detail-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Weather Condition */
+.forecast-condition {
+  text-align: center;
+  padding: var(--space-3) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.condition-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  text-transform: capitalize;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-1);
+}
+
+.condition-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* === LOADING STATES === */
+
+.forecast-card.loading {
+  opacity: 0.6;
+}
+
+.forecast-card.loading .forecast-weather-icon {
+  background: var(--skeleton);
+  color: transparent;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: shimmer 1.5s infinite;
+}
+
+.forecast-card.loading .temp-high,
+.forecast-card.loading .temp-low {
+  background: var(--skeleton);
+  color: transparent;
+  border-radius: var(--radius-sm);
+  height: 1.5rem;
+  animation: shimmer 1.5s infinite;
+}
+
+.forecast-card.loading .forecast-day {
+  background: var(--skeleton);
+  color: transparent;
+  border-radius: var(--radius-sm);
+  height: 1.25rem;
+  width: 80%;
+  animation: shimmer 1.5s infinite;
+}
+
+.forecast-card.loading .forecast-detail-value {
+  background: var(--skeleton);
+  color: transparent;
+  border-radius: var(--radius-sm);
+  height: 1rem;
+  width: 60%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* === STAGGER ANIMATION === */
+
+.forecast-grid.animate .forecast-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.forecast-grid.animate .forecast-card:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+@media (max-width: 1024px) {
+  .forecast-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .forecast-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
+  
+  .forecast-card {
+    padding: var(--space-4);
+  }
+  
+  .forecast-weather-icon {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .temp-high {
+    font-size: var(--font-size-xl);
+  }
+  
+  .temp-low {
+    font-size: var(--font-size-base);
+  }
+  
+  .forecast-details {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 640px) {
+  .forecast-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .forecast-card {
+    border-radius: var(--radius-xl);
+  }
+  
+  .forecast-details {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  
+  .forecast-detail {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-1);
+    padding: var(--space-2);
+  }
+  
+  .forecast-detail-icon {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .forecast-card {
+    padding: var(--space-3);
+  }
+  
+  .forecast-header {
+    margin-bottom: var(--space-3);
+  }
+  
+  .forecast-day {
+    font-size: var(--font-size-base);
+  }
+  
+  .forecast-weather-icon {
+    font-size: var(--font-size-xl);
+  }
+  
+  .temperature-range {
+    margin-bottom: var(--space-3);
+  }
+  
+  .temp-high {
+    font-size: var(--font-size-lg);
+  }
+  
+  .forecast-details {
+    gap: var(--space-1);
+  }
+}
+
+/* === WEATHER SPECIFIC STYLES === */
+
+/* Sunny forecast */
+.forecast-card[data-weather="sunny"] {
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.1) 0%,
+    var(--glass-card-bg) 50%
+  );
+}
+
+.forecast-card[data-weather="sunny"] .temperature-bar::before {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    #FED7AA 100%
+  );
+}
+
+/* Cloudy forecast */
+.forecast-card[data-weather="cloudy"] .forecast-weather-icon {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Rainy forecast */
+.forecast-card[data-weather="rainy"] {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.1) 0%,
+    var(--glass-card-bg) 50%
+  );
+}
+
+.forecast-card[data-weather="rainy"] .temperature-bar::before {
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary) 0%,
+    #BAE6FD 100%
+  );
+}
+
+.forecast-card[data-weather="rainy"] .forecast-weather-icon {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+/* Snowy forecast */
+.forecast-card[data-weather="snowy"] {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    var(--glass-card-bg) 50%
+  );
+}
+
+.forecast-card[data-weather="snowy"] .temperature-bar::before {
+  background: linear-gradient(
+    90deg,
+    #E0E7FF 0%,
+    #FFFFFF 100%
+  );
+}
+
+/* === ACCESSIBILITY ENHANCEMENTS === */
+
+.forecast-card:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 
+    var(--shadow-premium),
+    0 0 0 3px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.forecast-card[tabindex="0"]:focus {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.1) 0%,
+    var(--glass-card-bg) 50%
+  );
+}
+
+/* === THEME VARIATIONS === */
+
+[data-theme="light"] .forecast-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .forecast-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .forecast-card.today {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.1) 0%,
+    rgba(255, 255, 255, 0.9) 50%
+  );
+}
+
+[data-theme="light"] .forecast-detail {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .forecast-detail:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* === HIGH CONTRAST MODE === */
+
+@media (prefers-contrast: high) {
+  .forecast-card {
+    background: var(--color-bg-primary);
+    border: 2px solid var(--color-text-primary);
+  }
+  
+  .forecast-card.today {
+    background: var(--color-primary);
+    border: 2px solid var(--color-text-primary);
+  }
+  
+  .forecast-detail {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-text-secondary);
+  }
+  
+  .temperature-bar {
+    background: var(--color-text-muted);
+  }
+  
+  .temperature-bar::before {
+    background: var(--color-primary);
+  }
+}
